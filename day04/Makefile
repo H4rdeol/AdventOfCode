@@ -5,7 +5,7 @@
 ## Makefile
 ##
 
-NAME	=	day03
+NAME	=	day04
 
 all:	$(NAME)
 

@@ -5,8 +5,6 @@
 ## Makefile
 ##
 
-SRC	=	$(wildcard src/*.rs)
-
 NAME	=	day01
 
 all:	$(NAME)
