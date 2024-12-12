@@ -1,6 +1,5 @@
 use std::fs::File;
 use std::io::Read;
-use std::iter;
 use itertools::Itertools;
 
 #[derive(Debug, Clone)]
@@ -89,12 +88,10 @@ fn step1(lines: &mut Vec<Line>) {
     let operators = vec!['+', '*'];
 
     for line in lines.iter_mut() {
-        let combinations = iter::repeat(operators.clone())
-        .take(line.numbers.len() - 1)
-        .multi_cartesian_product();
-    
+        let operator_vec = vec![operators.clone(); line.numbers.len() - 1];
+        let combinations = operator_vec.iter().multi_cartesian_product();
         for combination in combinations.clone() {
-            line.operation = combination.iter().collect();
+            line.operation = combination.iter().copied().collect::<String>();
             if line.verify_result() {
                 result += line.expected_result;
                 break;
@@ -109,11 +106,10 @@ fn step2(lines: &mut Vec<Line>) {
     let operators = vec!['+', '*', '|'];
 
     for line in lines.iter_mut() {
-        let combinations = iter::repeat(operators.clone())
-        .take(line.numbers.len() - 1)
-        .multi_cartesian_product();
+        let operator_vec = vec![operators.clone(); line.numbers.len() - 1];
+        let combinations = operator_vec.iter().multi_cartesian_product();
         for combination in combinations.clone() {
-            line.operation = combination.iter().collect();
+            line.operation = combination.iter().copied().collect::<String>();
             if line.verify_result() {
                 result += line.expected_result;
                 break;
